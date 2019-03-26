@@ -13,6 +13,7 @@ deploy:
 	aws lambda update-function-code \
 		--function-name blog-posts-processor \
 		--zip-file fileb://./lambda.zip \
+		--publish
 
 clean:
 	@echo "\n\nCleaning up......"
