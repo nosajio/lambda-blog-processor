@@ -1,19 +1,19 @@
 bpd: build prepare deploy clean
 
 build:
-	@echo "\n\nBuilding lambda fn"
+	@echo "\n\nBuilding lambda fn......"
 	GOOS=linux go build -o lambda
 
 prepare:
+	@echo "\n\nCreating archive......"
 	zip lambda.zip ./lambda
 
 deploy:
-	@echo "\n\nDeploying to AWS lambda..."
+	@echo "\n\nDeploying to AWS lambda......"
 	aws lambda update-function-code \
 		--function-name blog-posts-processor \
-		--zip-file fileb://${GOPATH}/src/github.com/nosajio/lambda-blog-processor/lambda.zip \
-		--publish
+		--zip-file fileb://./lambda.zip \
 
 clean:
-	@echo "\n\nCleaning up..."
+	@echo "\n\nCleaning up......"
 	rm ./lambda ./lambda.zip
